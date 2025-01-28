@@ -1,0 +1,9 @@
+# .env
+# @name session
+POST {{KEYCLOAKURL}}
+Content-Type: application/x-www-form-urlencoded
+grant_type=password&username={{USER}}&password={{PASSWORD}}&client_id={{CLIENT_ID}}
+###
+# @ref session
+GET {{HOSTgateway}}/v1/templates?size=1000&tenantIds=8864c56e-f3d5-4b94-8230-5a58f6d551cf
+Authorization: Bearer {{session.access_token}}

@@ -1,0 +1,29 @@
+# .env
+# @name session
+POST {{KEYCLOAKURL}}
+Content-Type: application/x-www-form-urlencoded
+grant_type=password&username={{USER}}&password={{PASSWORD}}&client_id={{CLIENT_ID}}
+###
+# @ref session
+GET {{HOSTgateway}}/v2/telemetry/5049/keys
+Authorization: Bearer {{session.access_token}}
+###
+# @ref session
+GET {{HOSTgateway}}/v2/telemetry/5049/key/State.Speed/latest
+Authorization: Bearer {{session.access_token}}
+###
+# @ref session
+POST {{HOSTgateway}}/v2/telemetry
+Authorization: Bearer {{session.access_token}}
+Content-Type: application/json
+{
+    "datasourceKeys": [
+    "State.Speed"
+    ],
+    "assetIds": [
+        5030,
+        5049
+    ],
+    "from": "2025-01-24T05:00:00.000Z",
+    "to": "2025-01-24T05:00:10.000Z"
+}
